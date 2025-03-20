@@ -10,7 +10,6 @@ export const signUp = async (req, res) => {
   }
 
   try {
-    // Check if user already exists
     const existingUser = await findUserByEmail(email);
     if (existingUser) {
       return res.status(400).json({ message: "Email already in use." });
@@ -76,6 +75,11 @@ export const getProfile = (req, res) => {
       name: req.user.name,
       email: req.user.email,
       age: req.user.age,
+      githubId: req.user.github_id,
     },
   });
+};
+
+export const githubCallback = (req, res) => {
+  res.redirect("/profile");
 };
